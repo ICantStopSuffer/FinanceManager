@@ -86,7 +86,7 @@ function Income() {
     return (
         <div className="Main">
             <div>
-                <h2>Доходы & Расходы</h2>
+                <h2>Учет</h2>
                 <form className='MainForm'>
                     <div className='FormElement'>
                         <p>Тип</p>

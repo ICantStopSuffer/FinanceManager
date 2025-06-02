@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import {React, useEffect, useState} from 'react';
 import Income from './Components/Income';
-
+import Goals from './Components/Goals';
 
 function Home() {
     const [activeTab, setActiveTab] = useState('income');
@@ -18,9 +18,9 @@ function Home() {
         switch (activeTab) {
         case 'income':
             return <Income/>;
-/*        case 'goals':
+        case 'goals':
             return <Goals/>;
-        case 'charts':
+ /*       case 'charts':
             return <Charts/>;
         case 'reports':
             return <Reports/>;*/
@@ -33,19 +33,19 @@ function Home() {
         <div>
             <header className="header">
                 <button className="headerButton" onClick={() => setActiveTab("income")}>
-                    Income
+                    Доходы
                 </button>
 
                 <button className="headerButton" onClick={() => setActiveTab("goals")}>
-                    Goals
+                    Цели
                 </button>
 
                 <button className="headerButton" onClick={() => setActiveTab("charts")}>
-                    Charts
+                    Графики
                 </button>
                 
                 <button className="headerButton" onClick={() => setActiveTab("reports")}>
-                    Reports
+                    Отчеты
                 </button>
             </header>
             {renderContent()}
