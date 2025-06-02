@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import Testpage from './testpage.js';
-import './Auth.css'
+import Testpage from '../testpage.js';
+import './styles.css'
 
 function Authenticator() {
 
@@ -10,30 +10,37 @@ function Authenticator() {
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
   const navigate = useNavigate();
+  const [awaitingResponse, setAwaitingResponse] = useState(false);
 
   const onClickyClicky = async () => {
-        try {
-            const response = await fetch(`https://api.minote.ru/auth/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    identifier: login,
-                    password: password,
-                }),
-            });
-      
-            const data = await response.json();
-      
-            if (response.ok) {
-                setIsVerifying(true);
-                alert("Код отправлен на Email")
-            } else {
-                alert(data.error || "Ошибка сервера");
-            }
-          } catch (error) {
-                console.error("Ошибка:", error);
-                alert("Ошибка сети");
-          }
+      if (awaitingResponse) return;
+
+      try {
+        const response = await fetch(`https://api.minote.ru/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                identifier: login,
+                password: password,
+            }),
+        });
+
+        setAwaitingResponse(true);
+        const data = await response.json();
+
+        if (response.ok) {
+            setIsVerifying(true);
+            alert("Код отправлен на Email")
+        } else {
+            console.error("Ошибка:", data.error);
+            alert(data.error || "Ошибка сервера");
+        }
+        setAwaitingResponse(false);
+      } catch (error) {
+        setAwaitingResponse(false);
+        console.error("Ошибка:", error);
+        alert("Ошибка сети");
+      }
     }
 
         const handleVerifyCode = async () => {

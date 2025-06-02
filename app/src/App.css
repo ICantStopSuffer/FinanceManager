@@ -1,6 +1,5 @@
 .bigDiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  position: fixed;
+  height: 100%;
+  width: 100%;
 }

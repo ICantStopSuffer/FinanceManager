@@ -1,0 +1,35 @@
+.Main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    gap: 30px;
+}
+
+.MainForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.FormElement {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    gap: 5px;
+}
+
+.MainHistory {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.HistoryElement {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    gap: 10px;
+}

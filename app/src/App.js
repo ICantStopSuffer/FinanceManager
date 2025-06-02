@@ -1,7 +1,8 @@
 import './App.css';
 import Testpage from './testpage.js';
-import Authenticator from './Auth.js';
-import Registration from './Reg.js';
+import Authenticator from './Login/Auth.js';
+import Registration from './Login/Reg.js';
+import Home from './Home/Home.js'
 import {
   BrowserRouter,
   Route,
@@ -17,7 +18,7 @@ const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      navigate("/registration");
+      navigate("/login");
     }
   }, [navigate]);
 
@@ -29,7 +30,7 @@ function App() {
     <BrowserRouter>
       <div className='bigDiv'>
         <Routes>
-          <Route path='/' element={<ProtectedRoute><Testpage/></ProtectedRoute>}/>
+          <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}/>
           <Route path='/login' element={<Authenticator/>}/>
           <Route path='/registration' element={<Registration/>}/>
           
