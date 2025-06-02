@@ -9,6 +9,8 @@ import {
 import {React, useEffect, useState} from 'react';
 import Income from './Components/Income';
 import Goals from './Components/Goals';
+import Charts from './Components/Charts';
+import Reports from './Components/Reports';
 
 function Home() {
     const [activeTab, setActiveTab] = useState('income');
@@ -20,10 +22,10 @@ function Home() {
             return <Income/>;
         case 'goals':
             return <Goals/>;
- /*       case 'charts':
+       case 'charts':
             return <Charts/>;
         case 'reports':
-            return <Reports/>;*/
+            return <Reports/>;
         default:
             return <div/>;
         }

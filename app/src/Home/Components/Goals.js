@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-//import './css/goals.css';
+import './Goals.css';
 
 const Goals = () => {
-    // Состояния для управления целями и вводом данных
     const [goals, setGoals] = useState([]);
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState('');
@@ -11,12 +10,10 @@ const Goals = () => {
     const [addAmount, setAddAmount] = useState('');
     const [editIndex, setEditIndex] = useState(null);
 
-    // Загружаем цели при монтировании компонента
     useEffect(() => {
         fetchGoals();
     }, []);
 
-    // Функция для получения целей с API
     const fetchGoals = async () => {
         try {
             const token = localStorage.getItem('token');
@@ -31,8 +28,6 @@ const Goals = () => {
             alert('Ошибка загрузки целей', 'error');
         }
     };
-
-    // Проверка валидности даты окончания цели
     const isValidDate = (dateStr) => {
         const selectedDate = new Date(dateStr);
         const today = new Date();
@@ -40,14 +35,12 @@ const Goals = () => {
         return !isNaN(selectedDate.getTime()) && selectedDate >= today;
     };
 
-    // Сброс значений ввода
     const resetInputs = () => {
         setTitle('');
         setAmount('');
         setDeadline('');
     };
 
-    // Обработка добавления новой цели
     const handleAddGoal = async () => {
         if (!title || !amount || !deadline) {
             alert('Пожалуйста, заполните все поля.', 'error');
@@ -92,7 +85,6 @@ const Goals = () => {
         }
     };
 
-    // Обработка удаления цели
     const handleDelete = async (index) => {
         const goal = goals[index];
         try {
@@ -110,7 +102,6 @@ const Goals = () => {
         }
     };
 
-    // Функция для изменения состояния расширения цели
     const handleToggleExpand = (index) => {
         const goal = goals[index];
         if (Number(goal.saved) >= Number(goal.amount)) return;
@@ -119,7 +110,6 @@ const Goals = () => {
         setAddAmount('');
     };
 
-    // Обработка добавления накопленной суммы
     const handleAddSaved = async (index) => {
         if (!addAmount || isNaN(addAmount) || parseFloat(addAmount) <= 0) {
             alert('Введите корректную сумму.', 'error');
@@ -146,7 +136,6 @@ const Goals = () => {
         }
     };
 
-    // Обработка редактирования цели
     const handleEditGoal = async (index) => {
         if (!title || !amount || !deadline) {
             alert('Пожалуйста, заполните все поля.', 'error');
@@ -196,7 +185,7 @@ const Goals = () => {
     };
 
     return (
-        <div className="Main">
+        <div className="MainGoals">
             <div>
                 <h2>Цели</h2>
                 <div>
@@ -246,13 +235,13 @@ const Goals = () => {
                                 <div className="goal-main">
                                     <span>{goal.title}</span>
                                     <span>
-                                        <br/>
+                                        <br />
                                         <b>
                                             {goal.amount} ₽
                                         </b>
                                     </span>
                                     <span>
-                                        <br/>
+                                        <br />
                                         <b>
                                             До: {new Date(goal.deadline).toLocaleDateString()}
                                         </b>
@@ -267,22 +256,19 @@ const Goals = () => {
                                 ) : (
 
                                     <div onClick={(e) => e.stopPropagation()}>
-                                        <div>
-                                            <div>
-                                                <p>
-                                                    <b>Накоплено:</b>{' '}
-                                                    <span>
-                                                        {Number(goal.saved).toFixed(2)} ₽
-                                                    </span>
-                                                </p>
-                                                <p>
-                                                    <b>Осталось:</b>{' '}
-                                                    <span>
-                                                        {(Number(goal.amount) - Number(goal.saved)).toFixed(2)} ₽
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
+                                        
+                                        <p>
+                                            <b>Накоплено:</b>{' '}
+                                            <span>
+                                                {Number(goal.saved).toFixed(2)} ₽
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <b>Осталось:</b>{' '}
+                                            <span>
+                                                {(Number(goal.amount) - Number(goal.saved)).toFixed(2)} ₽
+                                            </span>
+                                        </p>
 
                                         <input
                                             type="number"
@@ -294,11 +280,9 @@ const Goals = () => {
                                             Добавить сумму накопления
                                         </button>
 
-                                        <div>
-                                            <button onClick={() => handleDelete(index)}>
-                                                Удалить
-                                            </button>
-                                        </div>
+                                        <button onClick={() => handleDelete(index)}>
+                                            Удалить
+                                        </button>
                                     </div>
 
                                 )}
